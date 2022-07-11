@@ -125,9 +125,12 @@
           const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
           console.log(optionId, option);
           if(optionSelected && !option.default){  
-            /* add price of option to variable price */
             price += option.price;
             console.log('price if: ', price);
+          }
+          else if(!optionSelected && option.default){
+            price -= option.price;
+            console.log('price else:', price);
           }
         }
       }
