@@ -85,6 +85,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
     initOrderForm(){
       const thisProduct = this;
@@ -108,6 +109,7 @@
     processOrder(){
       const thisProduct = this;
       console.log(thisProduct);
+      thisProduct.params = {};
       // convert form to object structuree,g {sause:['tomato]}
       const formData = utils.serializeFormToObject(thisProduct.form);
       console.log('formData', formData);
@@ -132,6 +134,30 @@
             price -= option.price;
             console.log('price else:', price);
           }
+          // options images
+          const images = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
+          console.log(images);
+          //if the option is selected
+          if(optionSelected){
+            if(!thisProduct.params[paramId]){
+              thisProduct.params[paramId] = {
+                label: param.label,
+                options: {},
+              };
+            }
+            thisProduct.params[paramId].options[optionId] = option.label;
+            // add class active
+            for(let image of images){
+              image.classList.add(classNames.menuProduct.imageVisible);
+            }
+          } 
+          else {
+            // remove class active
+            for(let image of images){
+              image.classList.remove(classNames.menuProduct.imageVisible);
+            }
+          }
+          console.log(thisProduct.params);
         }
       }
       // update calculated price in the HTML
