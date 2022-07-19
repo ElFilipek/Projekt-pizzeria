@@ -17,7 +17,6 @@ class Product {
   }
   renderInMenu() {
     const thisProduct = this;
-
     /* generate HTML based on templaete */
     const generatedHTML = templates.menuProduct(thisProduct.data);
     /*create element using utils.createElementFromHTML */
@@ -26,11 +25,9 @@ class Product {
     const menuContainer = document.querySelector(select.containerOf.menu);
     /*add element to menu*/
     menuContainer.appendChild(thisProduct.element);
-
   }
   getElements() {
     const thisProduct = this;
-    
     thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
     thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
     thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
@@ -70,14 +67,12 @@ class Product {
     thisProduct.form.addEventListener('submit', function(event){
       event.preventDefault();
       thisProduct.processOrder();
-    });
-      
+    });  
     for(let input of thisProduct.formInputs){
       input.addEventListener('change', function(){
         thisProduct.processOrder();
       });
     }
-      
     thisProduct.cartButton.addEventListener('click', function(){
       event.preventDefault();
       thisProduct.processOrder();
@@ -86,7 +81,6 @@ class Product {
   }
   initAmountWidget(){
     const thisProduct = this;
-
     thisProduct.amountWidget = new amountWidget(thisProduct.amountWidgetElem);
     thisProduct.amountWidgetElem.addEventListener('updated', function(){
       thisProduct.processOrder();
@@ -153,10 +147,8 @@ class Product {
   }
   addToCart() {
     const thisProduct = this;
-
     thisProduct.name = thisProduct.data.name;
     thisProduct.amount = thisProduct.amountWidget.value;
-
     //  app.cart.add(thisProduct);
     const event = new CustomEvent('add-to-cart', {
       bubbles: true,

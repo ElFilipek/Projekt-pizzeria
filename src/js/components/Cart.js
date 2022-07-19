@@ -11,12 +11,9 @@ class Cart{
     thisCart.initActions();
     thisCart.deliveryFee = settings.cart.defaultDeliveryFee;
   }
-
   getElements(element){
     const thisCart = this;
-
     thisCart.dom = {};
-
     thisCart.dom.wrapper = element;
     thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
     thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
@@ -28,12 +25,9 @@ class Cart{
     thisCart.dom.phone = element.querySelector(select.cart.phone);
     thisCart.dom.address = element.querySelector(select.cart.address);
   }
-
   initActions(){
     const thisCart = this;
-
     const triggerCart = thisCart.dom.toggleTrigger;
-
     triggerCart.addEventListener('click', function(event){
       event.preventDefault();
       thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
@@ -59,10 +53,8 @@ class Cart{
   }
   update() {
     const thisCart = this;
-
     thisCart.totalNumber = 0;
     thisCart.subtotalPrice = 0;
-
     for (let cartProduct of thisCart.products) {
       thisCart.subtotalPrice += cartProduct.price;
       thisCart.totalNumber += cartProduct.amount;
@@ -84,10 +76,8 @@ class Cart{
   }
   sendOrder(){
     const thisCart = this;
-
     const url = settings.db.url + '/' + settings.db.orders;
-    console.log('sendOrder URL: ', url);
-
+    //console.log('sendOrder URL: ', url);
     const payload = {
       phone: thisCart.dom.phone.value,
       address: thisCart.dom.address.value,

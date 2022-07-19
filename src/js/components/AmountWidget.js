@@ -7,13 +7,11 @@ class amountWidget{
     thisWidget.value = settings.amountWidget.defaultValue;
     thisWidget.setValue(thisWidget.input.value);
     thisWidget.initActions();
-
-    console.log('AmountWidget:', thisWidget);
-    console.log('constructor arguments:', element);
+    // console.log('AmountWidget:', thisWidget);
+    // console.log('constructor arguments:', element);
   }
   getElements(element){
     const thisWidget = this;
-
     thisWidget.element = element;
     thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
     thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
@@ -31,11 +29,9 @@ class amountWidget{
   }
   initActions(){
     const thisWidget = this;
-
     thisWidget.input.addEventListener('change', function(){
       thisWidget.setValue(thisWidget.input.value);
     });
-
     thisWidget.linkIncrease.addEventListener('click', function(event){
       event.preventDefault();
       thisWidget.setValue(thisWidget.value + 1);
@@ -47,7 +43,6 @@ class amountWidget{
   }
   announce(){
     const thisWidget = this;
-
     //const event = new Event('updated');
     const event = new CustomEvent('updated', {
       bubbles: true
